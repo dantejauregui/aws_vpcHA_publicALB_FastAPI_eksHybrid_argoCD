@@ -1,0 +1,39 @@
+architecture: standalone
+fullnameOverride: postgres
+
+auth:
+  username: appuser
+  database: appdb
+  existingSecret: postgres-secret
+  secretKeys:
+      adminPasswordKey: password
+      userPasswordKey: password
+
+primary:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+  nodeSelector:
+    storage: openebs
+  persistence:
+    enabled: true
+    storageClass: openebs-lvm
+    size: 10Gi
+# "all stateful apps retain PVCs" policy:
+  persistentVolumeClaimRetentionPolicy:
+    enabled: true
+    whenDeleted: Retain
+    whenScaled: Retain
+
+service:
+  type: ClusterIP
+
+metrics:
+  enabled: false
+
+backup:
+  enabled: false

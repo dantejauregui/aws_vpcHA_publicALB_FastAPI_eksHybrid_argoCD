@@ -1,0 +1,20 @@
+fullnameOverride: pgadmin
+
+# values to login to PGadmin: "email", and for PW check in its secret-template.yaml : 
+env:
+
+  email: admin_dnt@gmx.com
+
+existingSecret: pgadmin-secret
+
+
+persistentVolume:
+  enabled: true
+  storageClass: openebs-lvm
+  size: 5Gi
+# "with this app will retain its own data/PVC" policy:
+  annotations:
+    helm.sh/resource-policy: keep
+
+service:
+  type: ClusterIP

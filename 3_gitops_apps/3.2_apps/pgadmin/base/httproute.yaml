@@ -1,0 +1,30 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+
+metadata:
+
+  name: pgadmin-route
+
+  namespace: pgadmin
+
+spec:
+
+  parentRefs:
+
+  - name: homelab-gateway
+
+    namespace: envoy-gateway-system
+
+    sectionName: https
+
+  hostnames:
+
+  - pgadmin.homelab.local
+
+  rules:
+
+  - backendRefs:
+
+    - name: pgadmin
+
+      port: 80

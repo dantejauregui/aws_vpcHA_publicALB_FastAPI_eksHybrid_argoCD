@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: app-of-apps
+  namespace: argocd
+
+  # enabling "cascade delete" when using "kubectl delete -f app-of-apps.yaml" and delete all:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/background
+
+spec:
+
+  project: default
+
+  source:
+
+    repoURL: https://github.com/dnt-platform-lab/kubernetes_rke2_cloudinit_terraform_ansible_terragrunt_argoCD.git
+
+    targetRevision: main
+
+    path: 4_gitops_apps/clusters/homelab-cluster
+
+  destination:
+
+    server: https://kubernetes.default.svc
+
+    namespace: argocd
+
+  syncPolicy:
+
+    automated:
+
+      prune: true
+
+      selfHeal: true
+
+    syncOptions:
+
+    - CreateNamespace=true

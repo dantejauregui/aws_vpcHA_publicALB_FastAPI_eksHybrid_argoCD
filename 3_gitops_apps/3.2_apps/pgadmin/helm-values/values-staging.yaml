@@ -1,0 +1,17 @@
+# DUMMY DATA FOR NOW for Helm chart behavior:
+
+# fullnameOverride: pgadmin
+
+# env:
+
+#   email: admin-staging@gmx.com
+
+# existingSecret: pgadmin-secret
+
+# persistentVolume:
+
+#   enabled: true
+
+#   storageClass: fast-ssd
+
+#   size: 50Gi

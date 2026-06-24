@@ -36,4 +36,12 @@ logs/
 # AWS Credentials & Config (if applicable, use cautiously)
 .aws/
 
+# Terragrunt
+.terragrunt-cache/
+.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log
+crash.*.log
+
 live/

@@ -1,0 +1,66 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+
+# metadata:
+#   name: pgadmin
+#   namespace: argocd
+
+# spec:
+
+#   project: default
+
+#   sources:
+
+#   # Supporting manifests
+#   - repoURL: https://github.com/dantejauregui/kubernetes_rke2_cloudinit_terraform_ansible.git
+
+#     targetRevision: main
+
+#     path: 4_gitops_apps/apps/pgadmin/base
+
+#   # Helm chart
+#   - repoURL: https://helm.runix.net
+
+#     chart: pgadmin4
+
+#     targetRevision: 1.33.0
+
+#     helm:
+
+#       values: |
+
+#         env:
+
+#           email: admin@staging.company.com
+
+#           existingSecret: pgadmin-secret
+
+#         persistentVolume:
+
+#           enabled: true
+
+#           storageClass: openebs-lvm
+
+#           size: 50Gi
+
+#         service:
+
+#           type: ClusterIP
+
+#   destination:
+
+#     server: https://kubernetes.default.svc
+
+#     namespace: pgadmin
+
+#   syncPolicy:
+
+#     automated:
+
+#       prune: true
+
+#       selfHeal: true
+
+#     syncOptions:
+
+#     - CreateNamespace=true
